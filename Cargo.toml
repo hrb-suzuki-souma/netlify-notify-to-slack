@@ -1,6 +1,6 @@
 [package]
 name = "netlify-to-slack"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Souma Suzuki <suzuki.souma@hrbrain.co.jp>"]
 edition = "2018"
 
