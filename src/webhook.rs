@@ -40,7 +40,7 @@ fn success_request_param_factory(deploy_url: String, log_url: String) -> SlackWe
         title_link: Some(deploy_url.into()),
         footer: Some("Netlify".into()),
         footer_icon: Some("https://www.netlify.com/img/press/logos/logomark.png".into()),
-        text: Some(format!("Or check out the [build log]({})", log_url).into()),
+        text: Some(format!("Or check out the build log {}", log_url).into()),
     };
     SlackWebhookRequestParam {
         text: Some("Successful deploy".to_string()),
