@@ -14,11 +14,11 @@ impl SlackWebhook {
         Self { url }
     }
 
-    pub fn notify(&self, deploy_url: String, log_url: String) -> Result<(), Error> {
-        let body = &success_request_param_factory(deploy_url.to_owned(), log_url.to_owned());
+    pub fn notify(&self, deploy_url: String, log_url: String, site_name: String) -> Result<(), Error> {
+        let body = &success_request_param_factory(deploy_url.to_owned(), log_url.to_owned(), site_name.to_owned());
         let url = Url::from_str(self.url.as_str())?;
 
-        let client = reqwest::Client::new();
+         let client = reqwest::Client::new();
 
         client
             .post(url)
@@ -32,13 +32,13 @@ impl SlackWebhook {
     }
 }
 
-fn success_request_param_factory(deploy_url: String, log_url: String) -> SlackWebhookRequestParam {
+fn success_request_param_factory(deploy_url: String, log_url: String, site_name: String) -> SlackWebhookRequestParam {
     let attachment = SlackRequestAtttachment {
         author_name: Some("Netlify".into()),
         color: Some("#76ff14".into()),
         title: Some("Visit the changes live".into()),
         title_link: Some(deploy_url.into()),
-        footer: Some("Netlify".into()),
+        footer: Some(format!("Netlify - {}", site_name).into()),
         footer_icon: Some("https://www.netlify.com/img/press/logos/logomark.png".into()),
         text: Some(format!("Or check out the build log {}", log_url).into()),
     };

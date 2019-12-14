@@ -13,6 +13,7 @@ use std::io::Read;
 
 #[derive(Deserialize)]
 struct NetlifyDeployOutput {
+    site_name: String,
     deploy_url: String,
     logs: String,
 }
@@ -31,7 +32,7 @@ fn main() -> Result<(), Error> {
 
     let client = webhook::SlackWebhook::new(slack_webhook_url.to_string());
 
-    client.notify(deploy_output.deploy_url.clone(), deploy_output.logs.clone())?;
+    client.notify(deploy_output.deploy_url.clone(), deploy_output.logs.clone(), deploy_output.site_name.clone())?;
 
     Ok(())
 }
